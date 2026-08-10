@@ -21,6 +21,12 @@ on:
     paths:
       - "tools/audit_geography.py"
       - ".github/workflows/national-audit.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "tools/audit_geography.py"
+      - ".github/workflows/national-audit.yml"
 
 permissions:
   contents: read
