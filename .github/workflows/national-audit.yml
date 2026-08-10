@@ -1,0 +1,72 @@
+name: National VigiEau audit
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_communes:
+        description: "Number of communes to test (0 = all)"
+        required: true
+        default: "0"
+      concurrency:
+        description: "Worker threads (1-8)"
+        required: true
+        default: "4"
+      requests_per_second:
+        description: "Global request rate limit"
+        required: true
+        default: "5"
+  push:
+    branches:
+      - main
+      - audit-national-2026-08-10
+    paths:
+      - "tools/audit_geography.py"
+      - ".github/workflows/national-audit.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "tools/audit_geography.py"
+      - ".github/workflows/national-audit.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  national-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run national commune and postal-code audit
+        run: |
+          MAX_COMMUNES="${{ github.event.inputs.max_communes || '0' }}"
+          CONCURRENCY="${{ github.event.inputs.concurrency || '4' }}"
+          RPS="${{ github.event.inputs.requests_per_second || '5' }}"
+          python tools/audit_geography.py \
+            --output audit/vigieau_communes_audit.jsonl \
+            --summary-dir audit \
+            --max-communes "$MAX_COMMUNES" \
+            --concurrency "$CONCURRENCY" \
+            --rps "$RPS"
+
+      - name: Show summary
+        if: always()
+        run: |
+          if [ -f audit/resume.json ]; then cat audit/resume.json; fi
+
+      - name: Upload national audit results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vigieau-national-audit
+          path: audit/
+          if-no-files-found: warn
+          retention-days: 30
