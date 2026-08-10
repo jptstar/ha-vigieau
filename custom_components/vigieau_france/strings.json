@@ -1,0 +1,64 @@
+{
+  "title": "VigiEau France",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configurer VigiEau France",
+        "description": "Recherchez une adresse comme sur VigiEau, puis choisissez la provenance de l’eau et votre profil.",
+        "data": {
+          "address": "Adresse",
+          "water_type": "Les restrictions concernent l’eau",
+          "profile": "Profil"
+        }
+      },
+      "location": {
+        "title": "Choisir l’adresse",
+        "description": "Plusieurs résultats correspondent à votre recherche.",
+        "data": {
+          "location": "Adresse"
+        }
+      },
+      "zone": {
+        "title": "Choisir la ressource",
+        "description": "Plusieurs ressources sont référencées pour ce type d’eau. Sélectionnez celle dans laquelle vous prélevez de l’eau.",
+        "data": {
+          "zone_id": "Zone d’alerte / ressource"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Impossible de joindre le service public.",
+      "address_not_found": "Aucune adresse correspondante n’a été trouvée.",
+      "address_required": "Une adresse plus précise est nécessaire pour déterminer la réglementation applicable."
+    },
+    "abort": {
+      "already_configured": "Cette localisation est déjà configurée.",
+      "cannot_connect": "Impossible de joindre le service public.",
+      "address_required": "Une adresse plus précise est nécessaire."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options VigiEau France",
+        "description": "Modifiez la provenance de l’eau, le profil ou la fréquence d’actualisation.",
+        "data": {
+          "water_type": "Les restrictions concernent l’eau",
+          "profile": "Profil",
+          "scan_interval": "Actualisation (minutes)"
+        }
+      },
+      "zone": {
+        "title": "Choisir la ressource",
+        "description": "Plusieurs ressources sont référencées pour ce type d’eau.",
+        "data": {
+          "zone_id": "Zone d’alerte / ressource"
+        }
+      }
+    },
+    "abort": {
+      "cannot_connect": "Impossible de joindre le service public.",
+      "address_required": "Une adresse plus précise est nécessaire."
+    }
+  }
+}
