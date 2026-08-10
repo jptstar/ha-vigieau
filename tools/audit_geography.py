@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Jean-Philippe TESTART (jptstar)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 """Exhaustive commune/postal-code audit of the public VigiEau API.
 
 Author: jptstar
@@ -35,7 +38,7 @@ from urllib.request import Request, urlopen
 
 GEO_URL = "https://geo.api.gouv.fr/communes"
 VIGIEAU_URL = "https://api.vigieau.gouv.fr/api/zones"
-USER_AGENT = "ha-vigieau-audit/0.1.1 (+https://github.com/jptstar/ha-vigieau)"
+USER_AGENT = "vigieau-france-ha-audit/0.2.0 (+https://github.com/jptstar/vigieau-france-ha)"
 RETRYABLE_HTTP = {429, 500, 502, 503, 504}
 
 

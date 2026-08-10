@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Jean-Philippe TESTART (jptstar)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 """Conservative interpretation helpers for optional Home Assistant binary sensors.
 
 The official VigiEau text is always the reference. This module never changes

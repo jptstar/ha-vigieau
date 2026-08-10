@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Jean-Philippe TESTART (jptstar)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 """Build a compact VigiEau description catalogue from restrictions.csv.
 
 Author: jptstar

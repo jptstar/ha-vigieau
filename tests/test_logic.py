@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Jean-Philippe TESTART (jptstar)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 from custom_components.vigieau_france.logic import (
     build_snapshot,
     format_zones,
