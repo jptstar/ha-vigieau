@@ -21,12 +21,14 @@ on:
       - audit-national-2026-08-10
     paths:
       - "tools/audit_geography.py"
+      - "tools/build_catalogue.py"
       - ".github/workflows/national-audit.yml"
   pull_request:
     branches:
       - main
     paths:
       - "tools/audit_geography.py"
+      - "tools/build_catalogue.py"
       - ".github/workflows/national-audit.yml"
 
 permissions:
@@ -45,6 +47,15 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Download official VigiEau restrictions catalogue
+        run: |
+          mkdir -p audit
+          curl --fail --location --retry 4 --retry-all-errors \
+            "https://www.data.gouv.fr/api/1/datasets/r/e403a885-5eaf-411d-a03e-751a9c22930d" \
+            --output audit/restrictions.csv
+          python tools/build_catalogue.py audit/restrictions.csv \
+            --output audit/vigieau_catalogue_live.json
+
       - name: Run national commune and postal-code audit
         run: |
           MAX_COMMUNES="${{ github.event.inputs.max_communes || '0' }}"
@@ -53,6 +64,7 @@ jobs:
           python tools/audit_geography.py \
             --output audit/vigieau_communes_audit.jsonl \
             --summary-dir audit \
+            --catalogue audit/vigieau_catalogue_live.json \
             --max-communes "$MAX_COMMUNES" \
             --concurrency "$CONCURRENCY" \
             --rps "$RPS"
