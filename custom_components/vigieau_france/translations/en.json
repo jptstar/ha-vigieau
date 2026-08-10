@@ -1,0 +1,64 @@
+{
+  "title": "VigiEau France",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Set up VigiEau France",
+        "description": "Search for an address, then choose the water source and consumer profile.",
+        "data": {
+          "address": "Address",
+          "water_type": "Water source",
+          "profile": "Profile"
+        }
+      },
+      "location": {
+        "title": "Choose the address",
+        "description": "Several results match your search.",
+        "data": {
+          "location": "Address"
+        }
+      },
+      "zone": {
+        "title": "Choose the resource",
+        "description": "Several resources are referenced for this water source. Select the one you use.",
+        "data": {
+          "zone_id": "Alert zone / resource"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unable to reach the public service.",
+      "address_not_found": "No matching address was found.",
+      "address_required": "A more precise address is required to determine the applicable rules."
+    },
+    "abort": {
+      "already_configured": "This location is already configured.",
+      "cannot_connect": "Unable to reach the public service.",
+      "address_required": "A more precise address is required."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "VigiEau France options",
+        "description": "Change the water source, profile or update interval.",
+        "data": {
+          "water_type": "Water source",
+          "profile": "Profile",
+          "scan_interval": "Update interval (minutes)"
+        }
+      },
+      "zone": {
+        "title": "Choose the resource",
+        "description": "Several resources are referenced for this water source.",
+        "data": {
+          "zone_id": "Alert zone / resource"
+        }
+      }
+    },
+    "abort": {
+      "cannot_connect": "Unable to reach the public service.",
+      "address_required": "A more precise address is required."
+    }
+  }
+}

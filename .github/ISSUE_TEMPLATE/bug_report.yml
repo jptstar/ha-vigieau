@@ -1,0 +1,46 @@
+name: Bug report
+description: Report unexpected behavior in VigiEau France
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping improve VigiEau France. Do not post your precise home address publicly.
+  - type: input
+    id: ha_version
+    attributes:
+      label: Home Assistant version
+    validations:
+      required: true
+  - type: input
+    id: integration_version
+    attributes:
+      label: VigiEau France version
+    validations:
+      required: true
+  - type: dropdown
+    id: water_type
+    attributes:
+      label: Water source
+      options:
+        - AEP - Eau potable
+        - SUP - Eau superficielle
+        - SOU - Eau souterraine
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected VigiEau information
+      description: Describe what vigieau.gouv.fr shows without posting your precise address.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Home Assistant result
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics or logs
+      description: Attach redacted diagnostics if available.
