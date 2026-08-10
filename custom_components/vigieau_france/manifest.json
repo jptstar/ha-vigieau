@@ -1,1 +1,15 @@
-
+{
+  "codeowners": [
+    "@jptstar"
+  ],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/jptstar/ha-vigieau",
+  "domain": "vigieau_france",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/jptstar/ha-vigieau/issues",
+  "name": "VigiEau France",
+  "requirements": [],
+  "version": "0.1.1"
+}
