@@ -1,5 +1,11 @@
 # Changelog
 
+## Non publié
+
+- Corrige l’affichage du logo dans le README intégré à HACS avec une adresse
+  d’image absolue.
+- Met la documentation des entités et du redémarrage Home Assistant à jour.
+
 ## 0.3.1 - 2026-08-11
 
 - Place le nom de l’usage avant le type d’entité pour améliorer la lisibilité :

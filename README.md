@@ -1,7 +1,7 @@
 # VigiEau France for Home Assistant
 
 <p align="center">
-  <img src="brand/logo@2x.png" width="180" alt="Logo indépendant VigiEau France">
+  <img src="https://raw.githubusercontent.com/jptstar/vigieau-france-ha/main/brand/logo%402x.png" width="180" alt="Logo indépendant VigiEau France">
 </p>
 
 **Auteur : Jean-Philippe TESTART ([jptstar](https://github.com/jptstar))**
@@ -40,9 +40,9 @@ Chaque localisation crée notamment des capteurs :
 - Dernière actualisation
 - un capteur par usage/restriction affiché par VigiEau
 
-Home Assistant les répartit sur deux appareils liés : l’appareil principal regroupe les capteurs d’information et les messages officiels ; l’appareil enfant **Restrictions VigiEau** regroupe uniquement les capteurs binaires `Restriction` et `Interdit maintenant`. Les deux listes restent ainsi séparées dans l’interface.
+Home Assistant les répartit sur deux appareils liés : l’appareil principal regroupe les capteurs d’information et les messages officiels ; l’appareil enfant **Restrictions VigiEau** regroupe uniquement les capteurs binaires `Restriction` et `Interdit maintenant`. Les deux listes restent ainsi séparées dans l’interface. La situation, la zone, le type d’eau, le profil, l’arrêté en vigueur et la dernière actualisation sont rangés dans la catégorie **Diagnostic**.
 
-Pour conserver une liste lisible, les capteurs de message utilisent un état court (`Disponible` ou `Non disponible`). Le texte officiel intégral reste toujours accessible dans l’attribut `description`, quelle que soit sa longueur. Les noms commencent par leur fonction (`Message`, `Restriction` ou `Interdit maintenant`) afin de rester reconnaissables même lorsqu’ils sont tronqués par Home Assistant. Une icône distincte identifie chaque fonction : texte pour le message, alerte pour la restriction et horloge avec alerte pour l’interdiction à l’instant présent.
+Pour conserver une liste lisible, les capteurs de message utilisent un état court (`Disponible` ou `Non disponible`). Le texte officiel intégral reste toujours accessible dans l’attribut `description`, quelle que soit sa longueur. Le nom de l’usage apparaît en premier : `Nom - Message`, `Nom - Restriction` et `Nom - Interdit maintenant`. Une icône adaptée identifie immédiatement le type d’usage, par exemple potager, pelouse, golf, véhicule, fontaine, piscine ou terrain de sport.
 
 ## Capteurs binaires
 
@@ -77,6 +77,10 @@ Cliquez sur le bouton, ouvrez votre instance Home Assistant, puis confirmez l’
 8. Ouvrez **Paramètres → Appareils et services → Ajouter une intégration**, puis recherchez **VigiEau France**.
 
 Le domaine Home Assistant est `vigieau_france`.
+
+Un redémarrage est nécessaire après l’installation ou la mise à jour du code de
+l’intégration. Une modification du README ou de ses images ne nécessite pas de
+redémarrage de Home Assistant.
 
 ## Audit national
 
