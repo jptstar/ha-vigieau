@@ -1,6 +1,6 @@
 # Changelog
 
-## Non publié
+## 0.3.1 - 2026-08-11
 
 - Place le nom de l’usage avant le type d’entité pour améliorer la lisibilité :
   `Nom - Message`, `Nom - Restriction` et `Nom - Interdit maintenant`.
