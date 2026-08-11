@@ -10,6 +10,10 @@
 - Attribution d’une icône distincte à chacune de ces trois fonctions.
 - Séparation des capteurs d’information et des capteurs binaires dans deux
   appareils Home Assistant liés.
+- Ajout de quatre modes de localisation : adresse, coordonnées Home Assistant,
+  code postal et sélection sur carte.
+- Migration de l’ancienne API Adresse décommissionnée vers le service public de
+  géocodage direct et inverse de la Géoplateforme.
 
 ## 0.2.0 - 2026-08-10
 

@@ -3,19 +3,46 @@
   "config": {
     "step": {
       "user": {
-        "title": "Configurer VigiEau France",
-        "description": "Recherchez une adresse comme sur VigiEau, puis choisissez la provenance de l’eau et votre profil.",
+        "title": "Mode de localisation",
+        "description": "Choisissez comment définir la localisation à surveiller.",
         "data": {
-          "address": "Adresse",
+          "location_mode": "Mode de localisation"
+        }
+      },
+      "address": {
+        "title": "Rechercher une adresse",
+        "description": "Saisissez une adresse précise comme sur VigiEau.",
+        "data": {
+          "address": "Adresse"
+        }
+      },
+      "postal_code": {
+        "title": "Utiliser un code postal",
+        "description": "Si le code postal correspond à plusieurs communes, vous pourrez choisir la commune à l’étape suivante.",
+        "data": {
+          "postal_code": "Code postal"
+        }
+      },
+      "map": {
+        "title": "Sélectionner sur la carte",
+        "description": "Placez le repère à l’endroit exact dont vous souhaitez connaître les restrictions.",
+        "data": {
+          "map_location": "Point sur la carte"
+        }
+      },
+      "preferences": {
+        "title": "Profil et provenance de l’eau",
+        "description": "Choisissez les informations réglementaires à afficher pour cette localisation.",
+        "data": {
           "water_type": "Les restrictions concernent l’eau",
           "profile": "Profil"
         }
       },
       "location": {
-        "title": "Choisir l’adresse",
-        "description": "Plusieurs résultats correspondent à votre recherche.",
+        "title": "Choisir la localisation",
+        "description": "Plusieurs adresses ou communes correspondent à votre recherche.",
         "data": {
-          "location": "Adresse"
+          "location": "Localisation"
         }
       },
       "zone": {
@@ -29,6 +56,9 @@
     "error": {
       "cannot_connect": "Impossible de joindre le service public.",
       "address_not_found": "Aucune adresse correspondante n’a été trouvée.",
+      "postal_code_not_found": "Aucune commune ne correspond à ce code postal.",
+      "invalid_postal_code": "Saisissez un code postal français composé de cinq chiffres.",
+      "location_not_found": "Ces coordonnées ne correspondent pas à une adresse française.",
       "address_required": "Une adresse plus précise est nécessaire pour déterminer la réglementation applicable."
     },
     "abort": {
@@ -59,6 +89,16 @@
     "abort": {
       "cannot_connect": "Impossible de joindre le service public.",
       "address_required": "Une adresse plus précise est nécessaire."
+    }
+  },
+  "selector": {
+    "location_mode": {
+      "options": {
+        "address": "Adresse",
+        "home": "Coordonnées de Home Assistant",
+        "postal_code": "Code postal",
+        "map": "Sélection sur carte"
+      }
     }
   }
 }

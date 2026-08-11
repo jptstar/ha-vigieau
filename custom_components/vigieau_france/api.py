@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 """HTTP client for official public VigiEau and address APIs."""
+
 from __future__ import annotations
 
 import asyncio
@@ -9,7 +10,8 @@ from typing import Any
 
 from aiohttp import ClientError, ClientSession, ClientTimeout
 
-from .const import ADDRESS_API_BASE, VERSION, VIGIEAU_API_BASE
+from .const import COMMUNES_API_BASE, GEOCODING_API_BASE, VERSION, VIGIEAU_API_BASE
+from .location import parse_address_candidates, parse_postal_candidates
 from .models import AddressCandidate, Zone
 
 
@@ -52,9 +54,9 @@ class VigiEauApi:
                 timeout=self._timeout,
             ) as response:
                 status = response.status
-                if status == 404:
+                if status == 404 and url.startswith(VIGIEAU_API_BASE):
                     raise VigiEauNoActiveOrder
-                if status == 409:
+                if status == 409 and url.startswith(VIGIEAU_API_BASE):
                     raise VigiEauNeedPreciseLocation
                 if status >= 400:
                     body = await response.text()
@@ -66,32 +68,55 @@ class VigiEauApi:
         except (asyncio.TimeoutError, ClientError) as err:
             raise VigiEauConnectionError(str(err)) from err
 
-    async def async_search_addresses(self, query: str, limit: int = 10) -> list[AddressCandidate]:
-        """Search the public address service with the same broad search style as VigiEau."""
+    async def async_search_addresses(
+        self, query: str, limit: int = 10
+    ) -> list[AddressCandidate]:
+        """Search addresses through the current public Géoplateforme service."""
         payload = await self._get_json(
-            f"{ADDRESS_API_BASE}/search/", {"q": query, "limit": limit}
+            f"{GEOCODING_API_BASE}/search",
+            {"q": query, "index": "address", "limit": limit},
         )
-        features = payload.get("features", []) if isinstance(payload, dict) else []
-        candidates: list[AddressCandidate] = []
-        for feature in features:
-            if not isinstance(feature, dict):
-                continue
-            properties = feature.get("properties") or {}
-            geometry = feature.get("geometry") or {}
-            coordinates = geometry.get("coordinates") or []
-            if len(coordinates) < 2 or not properties.get("citycode"):
-                continue
-            candidates.append(
-                AddressCandidate(
-                    label=str(properties.get("label") or properties.get("name") or query),
-                    citycode=str(properties["citycode"]),
-                    longitude=float(coordinates[0]),
-                    latitude=float(coordinates[1]),
-                    location_type=str(properties.get("type", "")),
-                    raw=feature,
-                )
-            )
-        return candidates
+        return parse_address_candidates(payload, query)
+
+    async def async_reverse_location(
+        self,
+        latitude: float,
+        longitude: float,
+        *,
+        location_type: str,
+    ) -> AddressCandidate | None:
+        """Resolve exact selected coordinates to the nearest French address."""
+        payload = await self._get_json(
+            f"{GEOCODING_API_BASE}/reverse",
+            {
+                "lat": latitude,
+                "lon": longitude,
+                "index": "address",
+                "limit": 1,
+            },
+        )
+        candidates = parse_address_candidates(
+            payload,
+            f"{latitude:.6f}, {longitude:.6f}",
+            selected_coordinates=(longitude, latitude),
+            location_type=location_type,
+        )
+        return candidates[0] if candidates else None
+
+    async def async_search_postal_code(
+        self, postal_code: str
+    ) -> list[AddressCandidate]:
+        """Return every commune matching a French postal code."""
+        payload = await self._get_json(
+            f"{COMMUNES_API_BASE}/communes",
+            {
+                "codePostal": postal_code,
+                "fields": "nom,code,codesPostaux,centre",
+                "format": "json",
+                "geometry": "centre",
+            },
+        )
+        return parse_postal_candidates(payload, postal_code)
 
     async def async_get_zones(self, location: AddressCandidate) -> list[Zone]:
         """Fetch every applicable zone; profile and water type are intentionally not sent."""

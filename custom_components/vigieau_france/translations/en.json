@@ -3,19 +3,46 @@
   "config": {
     "step": {
       "user": {
-        "title": "Set up VigiEau France",
-        "description": "Search for an address, then choose the water source and consumer profile.",
+        "title": "Location mode",
+        "description": "Choose how to define the location to monitor.",
         "data": {
-          "address": "Address",
+          "location_mode": "Location mode"
+        }
+      },
+      "address": {
+        "title": "Search for an address",
+        "description": "Enter a precise address as you would on VigiEau.",
+        "data": {
+          "address": "Address"
+        }
+      },
+      "postal_code": {
+        "title": "Use a postal code",
+        "description": "If the postal code matches several communes, you can choose one on the next step.",
+        "data": {
+          "postal_code": "Postal code"
+        }
+      },
+      "map": {
+        "title": "Select on the map",
+        "description": "Place the marker at the exact location whose restrictions you want to know.",
+        "data": {
+          "map_location": "Map location"
+        }
+      },
+      "preferences": {
+        "title": "Profile and water source",
+        "description": "Choose the regulatory information to display for this location.",
+        "data": {
           "water_type": "Water source",
           "profile": "Profile"
         }
       },
       "location": {
-        "title": "Choose the address",
-        "description": "Several results match your search.",
+        "title": "Choose the location",
+        "description": "Several addresses or communes match your search.",
         "data": {
-          "location": "Address"
+          "location": "Location"
         }
       },
       "zone": {
@@ -29,6 +56,9 @@
     "error": {
       "cannot_connect": "Unable to reach the public service.",
       "address_not_found": "No matching address was found.",
+      "postal_code_not_found": "No commune matches this postal code.",
+      "invalid_postal_code": "Enter a five-digit French postal code.",
+      "location_not_found": "These coordinates do not match a French address.",
       "address_required": "A more precise address is required to determine the applicable rules."
     },
     "abort": {
@@ -59,6 +89,16 @@
     "abort": {
       "cannot_connect": "Unable to reach the public service.",
       "address_required": "A more precise address is required."
+    }
+  },
+  "selector": {
+    "location_mode": {
+      "options": {
+        "address": "Address",
+        "home": "Home Assistant coordinates",
+        "postal_code": "Postal code",
+        "map": "Select on map"
+      }
     }
   }
 }

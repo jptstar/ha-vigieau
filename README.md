@@ -15,6 +15,9 @@ Son objectif est de restituer dans Home Assistant, pour une même localisation, 
 ## Principes
 
 - recherche d’adresse via le service public français d’adresses ;
+- choix entre une adresse, les coordonnées de Home Assistant, un code postal ou
+  un point sélectionné sur la carte ;
+- géocodage direct et inverse via le service public Géoplateforme ;
 - appel VigiEau avec code INSEE et coordonnées précises lorsque nécessaire ;
 - récupération de toutes les zones applicables, sans imposer `profil` ou `zoneType` dans l’appel principal ;
 - sources d’eau `AEP`, `SUP` et `SOU` ;
@@ -101,6 +104,8 @@ GitHub Actions exécute également HACS validation et Hassfest.
 - VigiEau : `https://vigieau.gouv.fr`
 - API publique : `https://api.vigieau.gouv.fr/api`
 - Documentation API : dépôt public `MTES-MCT/vigieau-api`
+- Géocodage public : `https://data.geopf.fr/geocodage`
+- Communes et codes postaux : `https://geo.api.gouv.fr/communes`
 
 ## Licence
 
