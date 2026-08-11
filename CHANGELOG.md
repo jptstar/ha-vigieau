@@ -1,6 +1,6 @@
 # Changelog
 
-## Non publié
+## 0.3.2 - 2026-08-11
 
 - Corrige et centre l’affichage du logo dans les README avec une adresse d’image
   absolue compatible avec l’affichage intégré à HACS.
