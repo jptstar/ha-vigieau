@@ -37,7 +37,7 @@ Chaque localisation crée notamment des capteurs :
 - Dernière actualisation
 - un capteur par usage/restriction affiché par VigiEau
 
-Pour les descriptions de plus de 255 caractères, Home Assistant ne peut pas conserver le texte entier dans l’état. L’état indique alors `Voir message VigiEau complet` et le texte officiel intégral reste disponible dans l’attribut `description`.
+Pour conserver une liste lisible, les capteurs de message utilisent un état court (`Disponible` ou `Non disponible`). Le texte officiel intégral reste toujours accessible dans l’attribut `description`, quelle que soit sa longueur. Les noms commencent par leur fonction (`Message`, `Restriction` ou `Interdit maintenant`) afin de rester reconnaissables même lorsqu’ils sont tronqués par Home Assistant.
 
 ## Capteurs binaires
 

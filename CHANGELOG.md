@@ -1,5 +1,13 @@
 # Changelog
 
+## Non publié
+
+- Amélioration de la lisibilité des entités d’usage dans Home Assistant.
+- Remplacement des états contenant le texte officiel complet par un état court ;
+  le message intégral reste disponible dans l’attribut `description`.
+- Ajout de préfixes explicites aux noms : `Message`, `Restriction` et
+  `Interdit maintenant`.
+
 ## 0.2.0 - 2026-08-10
 
 - Passage à la licence GNU GPL v3.0 ou ultérieure (`GPL-3.0-or-later`).

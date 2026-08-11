@@ -3,10 +3,12 @@
 
 from custom_components.vigieau_france.logic import (
     build_snapshot,
+    format_usage_entity_name,
     format_zones,
     restriction_rank,
     severity_label,
     show_restrictions,
+    usage_message_state,
     usage_matches_profile,
 )
 from custom_components.vigieau_france.models import AddressCandidate, Usage, Zone
@@ -52,6 +54,20 @@ def test_severity_ranking_and_labels():
     assert restriction_rank("future_value") == 0
     assert severity_label("alerte_renforcee") == "alerte renforcée"
     assert severity_label(None) == "Pas de restrictions"
+
+
+def test_usage_entity_names_keep_their_purpose_visible_when_truncated():
+    usage_name = "Alimentation des fontaines publiques et privées"
+    assert format_usage_entity_name("Message", usage_name).startswith("Message – ")
+    assert format_usage_entity_name("Restriction", usage_name).startswith("Restriction – ")
+    assert format_usage_entity_name("Interdit maintenant", usage_name).startswith(
+        "Interdit maintenant – "
+    )
+
+
+def test_usage_message_state_is_short_and_preserves_empty_messages():
+    assert usage_message_state("Texte officiel très long") == "Disponible"
+    assert usage_message_state("   ") == "Non disponible"
 
 
 def test_zones_are_sorted_by_gravity_and_usages_by_name():

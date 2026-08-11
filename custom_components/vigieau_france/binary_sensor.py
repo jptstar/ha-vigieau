@@ -18,7 +18,7 @@ from homeassistant.util import dt as dt_util
 
 from .const import ATTRIBUTION, DOMAIN, NAME, VIGIEAU_WEBSITE
 from .interpretation import InterpretedRule, UsageInterpretation, interpret_usage
-from .logic import profile_label, usage_key, water_type_label
+from .logic import format_usage_entity_name, profile_label, usage_key, water_type_label
 from .models import Usage, VigiEauSnapshot
 
 PARALLEL_UPDATES = 0
@@ -151,7 +151,13 @@ class VigiEauRestrictionBinarySensor(VigiEauUsageBinarySensor):
     _attr_icon = "mdi:water-alert"
 
     def __init__(self, coordinator, entry: ConfigEntry, key: str, usage_name: str) -> None:
-        super().__init__(coordinator, entry, f"restriction_{key}", key, f"{usage_name} – restriction")
+        super().__init__(
+            coordinator,
+            entry,
+            f"restriction_{key}",
+            key,
+            format_usage_entity_name("Restriction", usage_name),
+        )
 
     @property
     def is_on(self) -> bool | None:
@@ -174,10 +180,10 @@ class VigiEauForbiddenNowBinarySensor(VigiEauUsageBinarySensor):
         self._rule_index = rule_index
         self._rule_subject = rule_subject
         suffix = f"interdit_maintenant_{key}"
-        name = f"{usage_name} – interdit maintenant"
+        name = format_usage_entity_name("Interdit maintenant", usage_name)
         if rule_index is not None:
             suffix += f"_{rule_index}"
-            name = f"{rule_subject} – interdit maintenant"
+            name = format_usage_entity_name("Interdit maintenant", rule_subject or usage_name)
         super().__init__(coordinator, entry, suffix, key, name)
 
     def _selected_rule(self) -> tuple[UsageInterpretation | None, InterpretedRule | None]:
