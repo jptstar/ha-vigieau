@@ -54,12 +54,22 @@ est interprété en deux sous-règles distinctes : pelouse interdite en permanen
 
 ## Installation HACS
 
-1. HACS → menu `⋮` → **Custom repositories**.
-2. Ajouter `https://github.com/jptstar/vigieau-france-ha`.
-3. Type : **Integration**.
-4. Installer **VigiEau France**.
-5. Redémarrer Home Assistant.
-6. Paramètres → Appareils et services → Ajouter une intégration → **VigiEau France**.
+### Ajout direct
+
+[![Ajouter VigiEau France à HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=jptstar&repository=vigieau-france-ha&category=integration)
+
+Cliquez sur le bouton, ouvrez votre instance Home Assistant, puis confirmez l’ajout du dépôt dans HACS.
+
+### Ajout manuel dans HACS
+
+1. Dans HACS, ouvrez **Intégrations**.
+2. Ouvrez le menu `⋮`, puis sélectionnez **Dépôts personnalisés**.
+3. Ajoutez `https://github.com/jptstar/vigieau-france-ha`.
+4. Sélectionnez le type **Integration**, puis confirmez avec **Ajouter**.
+5. Recherchez **VigiEau France** dans HACS et ouvrez sa fiche.
+6. Sélectionnez **Télécharger**, puis confirmez la version proposée.
+7. Redémarrez Home Assistant.
+8. Ouvrez **Paramètres → Appareils et services → Ajouter une intégration**, puis recherchez **VigiEau France**.
 
 Le domaine Home Assistant est `vigieau_france`.
 

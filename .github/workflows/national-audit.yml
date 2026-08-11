@@ -15,21 +15,6 @@ on:
         description: "Global request rate limit"
         required: true
         default: "5"
-  push:
-    branches:
-      - main
-      - audit-national-2026-08-10
-    paths:
-      - "tools/audit_geography.py"
-      - "tools/build_catalogue.py"
-      - ".github/workflows/national-audit.yml"
-  pull_request:
-    branches:
-      - main
-    paths:
-      - "tools/audit_geography.py"
-      - "tools/build_catalogue.py"
-      - ".github/workflows/national-audit.yml"
 
 permissions:
   contents: read
