@@ -8,6 +8,8 @@
 - Ajout de préfixes explicites aux noms : `Message`, `Restriction` et
   `Interdit maintenant`.
 - Attribution d’une icône distincte à chacune de ces trois fonctions.
+- Séparation des capteurs d’information et des capteurs binaires dans deux
+  appareils Home Assistant liés.
 
 ## 0.2.0 - 2026-08-10
 

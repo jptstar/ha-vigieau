@@ -16,7 +16,7 @@ from homeassistant.helpers.event import async_track_time_change
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from homeassistant.util import dt as dt_util
 
-from .const import ATTRIBUTION, DOMAIN, NAME, VIGIEAU_WEBSITE
+from .const import ATTRIBUTION, DOMAIN, VIGIEAU_WEBSITE
 from .interpretation import InterpretedRule, UsageInterpretation, interpret_usage
 from .logic import format_usage_entity_name, profile_label, usage_key, water_type_label
 from .models import Usage, VigiEauSnapshot
@@ -97,11 +97,12 @@ class VigiEauBaseBinarySensor(CoordinatorEntity, BinarySensorEntity):
         self._attr_name = name
         self._attr_unique_id = f"{entry.unique_id}_{suffix}"
         self._attr_device_info = DeviceInfo(
-            identifiers={(DOMAIN, entry.entry_id)},
-            name=f"{NAME} – {entry.title}",
+            identifiers={(DOMAIN, f"{entry.entry_id}_restrictions")},
+            name=f"Restrictions VigiEau – {entry.title}",
             manufacturer="VigiEau",
-            model="Service public – API VigiEau",
+            model="États binaires – interprétation prudente",
             configuration_url=VIGIEAU_WEBSITE,
+            via_device=(DOMAIN, entry.entry_id),
         )
 
 
