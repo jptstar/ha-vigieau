@@ -6,6 +6,8 @@
   `Nom - Message`, `Nom - Restriction` et `Nom - Interdit maintenant`.
 - Ajoute des icônes adaptées aux usages : potager, pelouse, golf, terrain de sport,
   véhicule, fontaine, piscine, plan d’eau et nettoyage des surfaces.
+- Regroupe la situation, la zone, le type d’eau, le profil, l’arrêté en vigueur et
+  la dernière actualisation dans la catégorie Diagnostic de Home Assistant.
 
 ## 0.3.0 - 2026-08-11
 
