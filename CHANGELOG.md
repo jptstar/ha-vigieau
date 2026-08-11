@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.3.0 - 2026-08-11
+
+- Amélioration de la lisibilité des entités d’usage dans Home Assistant.
+- Remplacement des états contenant le texte officiel complet par un état court ;
+  le message intégral reste disponible dans l’attribut `description`.
+- Ajout de préfixes explicites aux noms : `Message`, `Restriction` et
+  `Interdit maintenant`.
+- Attribution d’une icône distincte à chacune de ces trois fonctions.
+- Séparation des capteurs d’information et des capteurs binaires dans deux
+  appareils Home Assistant liés.
+- Ajout de quatre modes de localisation : adresse, coordonnées Home Assistant,
+  code postal et sélection sur carte.
+- Migration de l’ancienne API Adresse décommissionnée vers le service public de
+  géocodage direct et inverse de la Géoplateforme.
+
 ## 0.2.0 - 2026-08-10
 
 - Passage à la licence GNU GPL v3.0 ou ultérieure (`GPL-3.0-or-later`).

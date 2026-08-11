@@ -15,7 +15,14 @@ from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import ATTRIBUTION, DOMAIN, NAME, VIGIEAU_WEBSITE
-from .logic import profile_label, severity_label, usage_key, water_type_label
+from .logic import (
+    format_usage_entity_name,
+    profile_label,
+    severity_label,
+    usage_key,
+    usage_message_state,
+    water_type_label,
+)
 from .models import Usage, VigiEauSnapshot
 
 PARALLEL_UPDATES = 0
@@ -196,8 +203,13 @@ class VigiEauUsageSensor(VigiEauBaseSensor):
 
     def __init__(self, coordinator, entry: ConfigEntry, key: str, initial_name: str) -> None:
         self._usage_key = key
-        super().__init__(coordinator, entry, f"usage_{key}", initial_name)
-        self._attr_icon = "mdi:water-minus"
+        super().__init__(
+            coordinator,
+            entry,
+            f"usage_{key}",
+            format_usage_entity_name("Message", initial_name),
+        )
+        self._attr_icon = "mdi:text-box-outline"
 
     def _usage(self) -> Usage | None:
         for usage in self.coordinator.data.visible_usages:
@@ -214,9 +226,7 @@ class VigiEauUsageSensor(VigiEauBaseSensor):
         usage = self._usage()
         if usage is None:
             return None
-        if len(usage.description) <= 255:
-            return usage.description
-        return "Voir message VigiEau complet"
+        return usage_message_state(usage.description)
 
     @property
     def extra_state_attributes(self) -> dict[str, Any]:

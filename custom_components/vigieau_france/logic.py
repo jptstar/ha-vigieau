@@ -37,6 +37,16 @@ def profile_label(profile: str) -> str:
     return PROFILES.get(profile, profile)
 
 
+def format_usage_entity_name(prefix: str, usage_name: str) -> str:
+    """Put the entity purpose first so truncated names remain distinguishable."""
+    return f"{prefix} – {usage_name}"
+
+
+def usage_message_state(description: str) -> str:
+    """Return a short state while the full official message stays an attribute."""
+    return "Disponible" if description.strip() else "Non disponible"
+
+
 def format_zones(zones: list[Zone] | tuple[Zone, ...]) -> tuple[Zone, ...]:
     """Sort usage cards alphabetically, then zones by descending gravity."""
     normalized = [

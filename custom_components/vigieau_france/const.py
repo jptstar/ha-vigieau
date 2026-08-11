@@ -5,13 +5,17 @@
 
 DOMAIN = "vigieau_france"
 NAME = "VigiEau France"
-VERSION = "0.1.1"
+VERSION = "0.3.0"
 
 VIGIEAU_API_BASE = "https://api.vigieau.gouv.fr/api"
-ADDRESS_API_BASE = "https://api-adresse.data.gouv.fr"
+GEOCODING_API_BASE = "https://data.geopf.fr/geocodage"
+COMMUNES_API_BASE = "https://geo.api.gouv.fr"
 VIGIEAU_WEBSITE = "https://vigieau.gouv.fr"
 
 CONF_ADDRESS = "address"
+CONF_LOCATION_MODE = "location_mode"
+CONF_MAP_LOCATION = "map_location"
+CONF_POSTAL_CODE = "postal_code"
 CONF_LABEL = "label"
 CONF_CITYCODE = "citycode"
 CONF_LATITUDE = "latitude"
@@ -27,6 +31,17 @@ DEFAULT_WATER_TYPE = "AEP"
 DEFAULT_SCAN_INTERVAL = 60
 MIN_SCAN_INTERVAL = 15
 MAX_SCAN_INTERVAL = 1440
+
+LOCATION_MODE_ADDRESS = "address"
+LOCATION_MODE_HOME = "home"
+LOCATION_MODE_POSTAL_CODE = "postal_code"
+LOCATION_MODE_MAP = "map"
+LOCATION_MODES = (
+    LOCATION_MODE_ADDRESS,
+    LOCATION_MODE_HOME,
+    LOCATION_MODE_POSTAL_CODE,
+    LOCATION_MODE_MAP,
+)
 
 PROFILES = {
     "particulier": "particulier",

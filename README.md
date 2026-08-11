@@ -15,6 +15,9 @@ Son objectif est de restituer dans Home Assistant, pour une même localisation, 
 ## Principes
 
 - recherche d’adresse via le service public français d’adresses ;
+- choix entre une adresse, les coordonnées de Home Assistant, un code postal ou
+  un point sélectionné sur la carte ;
+- géocodage direct et inverse via le service public Géoplateforme ;
 - appel VigiEau avec code INSEE et coordonnées précises lorsque nécessaire ;
 - récupération de toutes les zones applicables, sans imposer `profil` ou `zoneType` dans l’appel principal ;
 - sources d’eau `AEP`, `SUP` et `SOU` ;
@@ -37,7 +40,9 @@ Chaque localisation crée notamment des capteurs :
 - Dernière actualisation
 - un capteur par usage/restriction affiché par VigiEau
 
-Pour les descriptions de plus de 255 caractères, Home Assistant ne peut pas conserver le texte entier dans l’état. L’état indique alors `Voir message VigiEau complet` et le texte officiel intégral reste disponible dans l’attribut `description`.
+Home Assistant les répartit sur deux appareils liés : l’appareil principal regroupe les capteurs d’information et les messages officiels ; l’appareil enfant **Restrictions VigiEau** regroupe uniquement les capteurs binaires `Restriction` et `Interdit maintenant`. Les deux listes restent ainsi séparées dans l’interface.
+
+Pour conserver une liste lisible, les capteurs de message utilisent un état court (`Disponible` ou `Non disponible`). Le texte officiel intégral reste toujours accessible dans l’attribut `description`, quelle que soit sa longueur. Les noms commencent par leur fonction (`Message`, `Restriction` ou `Interdit maintenant`) afin de rester reconnaissables même lorsqu’ils sont tronqués par Home Assistant. Une icône distincte identifie chaque fonction : texte pour le message, alerte pour la restriction et horloge avec alerte pour l’interdiction à l’instant présent.
 
 ## Capteurs binaires
 
@@ -99,6 +104,8 @@ GitHub Actions exécute également HACS validation et Hassfest.
 - VigiEau : `https://vigieau.gouv.fr`
 - API publique : `https://api.vigieau.gouv.fr/api`
 - Documentation API : dépôt public `MTES-MCT/vigieau-api`
+- Géocodage public : `https://data.geopf.fr/geocodage`
+- Communes et codes postaux : `https://geo.api.gouv.fr/communes`
 
 ## Licence
 
