@@ -5,7 +5,7 @@
 
 DOMAIN = "vigieau_france"
 NAME = "VigiEau France"
-VERSION = "0.2.0"
+VERSION = "0.3.0"
 
 VIGIEAU_API_BASE = "https://api.vigieau.gouv.fr/api"
 GEOCODING_API_BASE = "https://data.geopf.fr/geocodage"

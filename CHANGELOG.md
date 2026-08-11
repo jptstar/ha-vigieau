@@ -1,6 +1,6 @@
 # Changelog
 
-## Non publié
+## 0.3.0 - 2026-08-11
 
 - Amélioration de la lisibilité des entités d’usage dans Home Assistant.
 - Remplacement des états contenant le texte officiel complet par un état court ;
