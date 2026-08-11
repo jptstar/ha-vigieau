@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Jean-Philippe TESTART (jptstar)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 """Sensor platform for VigiEau France."""
 from __future__ import annotations
 

@@ -1,5 +1,9 @@
-# Brand assets
+# Identité visuelle
 
-Brand assets used by HACS for VigiEau France.
+Identité visuelle originale utilisée par HACS pour VigiEau France.
 
-Author: jptstar
+Copyright © 2026 Jean-Philippe TESTART (jptstar).
+
+Ces fichiers sont distribués avec le projet sous `GPL-3.0-or-later`. Ils ne
+reprennent aucun logo officiel de VigiEau, de Home Assistant ou de l’État
+français et ne signalent aucune affiliation avec ces organismes.

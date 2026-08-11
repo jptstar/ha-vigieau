@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Jean-Philippe TESTART (jptstar)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 """HTTP client for official public VigiEau and address APIs."""
 from __future__ import annotations
 
@@ -37,7 +40,7 @@ class VigiEauApi:
         self._session = session
         self._timeout = ClientTimeout(total=20)
         self._headers = {
-            "User-Agent": f"HomeAssistant-VigiEau-France/{VERSION} (+https://github.com/jptstar/ha-vigieau)"
+            "User-Agent": f"HomeAssistant-VigiEau-France/{VERSION} (+https://github.com/jptstar/vigieau-france-ha)"
         }
 
     async def _get_json(self, url: str, params: dict[str, Any]) -> Any:

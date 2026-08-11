@@ -1,6 +1,10 @@
 # VigiEau France for Home Assistant
 
-**Author: [jptstar](https://github.com/jptstar)**
+<p align="center">
+  <img src="brand/logo@2x.png" width="180" alt="Logo indépendant VigiEau France">
+</p>
+
+**Auteur : Jean-Philippe TESTART ([jptstar](https://github.com/jptstar))**
 
 VigiEau France est une intégration Home Assistant **non officielle et indépendante** utilisant l’API publique officielle VigiEau.
 
@@ -51,7 +55,7 @@ est interprété en deux sous-règles distinctes : pelouse interdite en permanen
 ## Installation HACS
 
 1. HACS → menu `⋮` → **Custom repositories**.
-2. Ajouter `https://github.com/jptstar/ha-vigieau`.
+2. Ajouter `https://github.com/jptstar/vigieau-france-ha`.
 3. Type : **Integration**.
 4. Installer **VigiEau France**.
 5. Redémarrer Home Assistant.
@@ -88,4 +92,18 @@ GitHub Actions exécute également HACS validation et Hassfest.
 
 ## Licence
 
-MIT License — Copyright © 2026 jptstar.
+Copyright © 2026 Jean-Philippe TESTART (jptstar).
+
+Ce projet est distribué sous la licence **GNU General Public License v3.0 ou
+ultérieure** (`GPL-3.0-or-later`). Les versions modifiées ou redistribuées
+doivent respecter les conditions de cette licence et conserver les mentions de
+copyright et de licence. Consultez le fichier [LICENSE](LICENSE).
+
+La licence couvre uniquement cette intégration indépendante et son code. Elle
+ne confère aucun droit sur VigiEau, les marques, logos, données, contenus,
+services ou logiciels de l’État français et de leurs détenteurs respectifs.
+Ce projet reste non officiel et sans affiliation avec l’administration.
+
+Les versions publiées avant le passage à la GPL restent utilisables selon la
+licence MIT sous laquelle elles ont été distribuées. La version 0.2.0 et les
+versions ultérieures sont publiées sous `GPL-3.0-or-later`.

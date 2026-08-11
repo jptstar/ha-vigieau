@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0 - 2026-08-10
+
+- Passage à la licence GNU GPL v3.0 ou ultérieure (`GPL-3.0-or-later`).
+- Copyright attribué à Jean-Philippe TESTART (jptstar).
+- Nouvelle identité visuelle originale et indépendante pour HACS.
+- Mise à jour de toutes les URLs après le renommage du dépôt en
+  `jptstar/vigieau-france-ha`.
+- Les versions antérieures restent disponibles sous leur licence MIT d’origine.
+
 ## 0.1.1
 
 - Intégration Home Assistant complète avec configuration graphique.
