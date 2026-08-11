@@ -56,12 +56,16 @@ def test_severity_ranking_and_labels():
     assert severity_label(None) == "Pas de restrictions"
 
 
-def test_usage_entity_names_keep_their_purpose_visible_when_truncated():
+def test_usage_entity_names_put_the_usage_before_the_purpose():
     usage_name = "Alimentation des fontaines publiques et privées"
-    assert format_usage_entity_name("Message", usage_name).startswith("Message – ")
-    assert format_usage_entity_name("Restriction", usage_name).startswith("Restriction – ")
-    assert format_usage_entity_name("Interdit maintenant", usage_name).startswith(
-        "Interdit maintenant – "
+    assert format_usage_entity_name("Message", usage_name) == f"{usage_name} - Message"
+    assert (
+        format_usage_entity_name("Restriction", usage_name)
+        == f"{usage_name} - Restriction"
+    )
+    assert (
+        format_usage_entity_name("Interdit maintenant", usage_name)
+        == f"{usage_name} - Interdit maintenant"
     )
 
 

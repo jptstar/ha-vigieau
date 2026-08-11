@@ -1,5 +1,10 @@
 # Changelog
 
+## Non publié
+
+- Place le nom de l’usage avant le type d’entité pour améliorer la lisibilité :
+  `Nom - Message`, `Nom - Restriction` et `Nom - Interdit maintenant`.
+
 ## 0.3.0 - 2026-08-11
 
 - Amélioration de la lisibilité des entités d’usage dans Home Assistant.

@@ -37,9 +37,9 @@ def profile_label(profile: str) -> str:
     return PROFILES.get(profile, profile)
 
 
-def format_usage_entity_name(prefix: str, usage_name: str) -> str:
-    """Put the entity purpose first so truncated names remain distinguishable."""
-    return f"{prefix} – {usage_name}"
+def format_usage_entity_name(purpose: str, usage_name: str) -> str:
+    """Put the official usage name first, followed by the entity purpose."""
+    return f"{usage_name} - {purpose}"
 
 
 def usage_message_state(description: str) -> str:
