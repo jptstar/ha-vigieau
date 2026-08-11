@@ -58,14 +58,18 @@ Chaque localisation crée notamment des capteurs :
 
 Home Assistant les répartit sur deux appareils liés : l’appareil principal regroupe les capteurs d’information et les messages officiels ; l’appareil enfant **Restrictions VigiEau** regroupe uniquement les capteurs binaires `Restriction` et `Interdit maintenant`. Les deux listes restent ainsi séparées dans l’interface. La situation, la zone, le type d’eau, le profil, l’arrêté en vigueur et la dernière actualisation sont rangés dans la catégorie **Diagnostic**.
 
-Pour conserver une liste lisible, les capteurs de message affichent l’état court `Ouvrir pour lire` lorsqu’un texte officiel existe, ou `Aucun message` dans le cas contraire. Ouvrez l’entité pour consulter le texte officiel intégral dans l’attribut `description`, quelle que soit sa longueur. Le nom de l’usage apparaît en premier : `Nom - Message`, `Nom - Restriction` et `Nom - Interdit maintenant`. Une icône adaptée identifie immédiatement le type d’usage, par exemple potager, pelouse, golf, véhicule, fontaine, piscine ou terrain de sport.
+Les capteurs de message affichent directement le texte officiel dans leur état. Si ce texte dépasse la longueur acceptée par Home Assistant, seul l’état est raccourci avec `…` ; le contenu intégral et non modifié reste disponible dans l’attribut `description`. En l’absence de texte, l’état indique `Aucun message`. Le nom de l’usage apparaît en premier : `Nom - Message`, `Nom - Restriction` et `Nom - Interdit maintenant`. Une icône adaptée identifie immédiatement le type d’usage, par exemple potager, pelouse, golf, véhicule, fontaine, piscine ou terrain de sport.
 
 ## Capteurs binaires
 
 Chaque usage reçoit deux capteurs binaires complémentaires :
 
-- **Restriction** : `ON` seulement lorsqu’une restriction est explicitement identifiable ;
-- **Interdit maintenant** : `ON` ou `OFF` seulement lorsque la formulation permet une conclusion déterministe à l’heure locale ; sinon l’état reste `unknown`.
+- **Restriction** : affiche `Restriction` lorsqu’une restriction est explicitement identifiable, `Aucune` lorsque son absence est explicite, sinon `Inconnu` ;
+- **Interdit maintenant** : affiche `Interdit maintenant` ou `Non interdit maintenant` seulement lorsque la formulation permet une conclusion déterministe à l’heure locale ; sinon l’état reste `Inconnu`.
+
+Chaque capteur binaire conserve le texte officiel dans l’attribut `message_vigieau`.
+Home Assistant ne propose pas d’infobulle personnalisable au survol dans la page
+Appareil : ouvrez le capteur pour consulter cet attribut.
 
 Les règles d’un même message ne sont jamais fusionnées entre usages. Par exemple :
 

@@ -9,8 +9,11 @@
   un plan d’eau pour les lacs, étangs et mares.
 - Ajoute au README une section française sur le support, la maintenance bénévole
   et le partage prudent des diagnostics.
-- Remplace l’état ambigu `Disponible` des messages par `Ouvrir pour lire` et
-  indique clairement que le texte officiel complet se trouve dans `description`.
+- Rétablit le texte officiel dans l’état des capteurs Message, avec raccourcissement
+  sûr des textes trop longs et conservation intégrale dans `description`.
+- Affiche les états binaires `Restriction` / `Aucune` et `Interdit maintenant` /
+  `Non interdit maintenant`, tout en conservant le texte officiel dans
+  `message_vigieau`.
 
 ## 0.3.1 - 2026-08-11
 

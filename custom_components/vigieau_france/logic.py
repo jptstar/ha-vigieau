@@ -33,6 +33,8 @@ _USAGE_ICON_RULES = (
     (("jardin", "culture", "irrigation"), "mdi:sprout"),
 )
 
+_MAX_USAGE_STATE_LENGTH = 255
+
 
 def restriction_rank(severity: str | None) -> int:
     """Return the rank used to order VigiEau situations."""
@@ -73,8 +75,13 @@ def usage_icon(usage_name: str) -> str:
 
 
 def usage_message_state(description: str) -> str:
-    """Tell the user how to access the full official message attribute."""
-    return "Ouvrir pour lire" if description.strip() else "Aucun message"
+    """Expose the official text as state, shortened only when HA requires it."""
+    message = description.strip()
+    if not message:
+        return "Aucun message"
+    if len(message) <= _MAX_USAGE_STATE_LENGTH:
+        return message
+    return f"{message[: _MAX_USAGE_STATE_LENGTH - 1].rstrip()}…"
 
 
 def format_zones(zones: list[Zone] | tuple[Zone, ...]) -> tuple[Zone, ...]:

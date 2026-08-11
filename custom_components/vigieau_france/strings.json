@@ -1,5 +1,23 @@
 {
   "title": "VigiEau France",
+  "entity": {
+    "binary_sensor": {
+      "usage_restriction": {
+        "state": {
+          "on": "Restriction",
+          "off": "Aucune",
+          "unknown": "Inconnu"
+        }
+      },
+      "usage_forbidden_now": {
+        "state": {
+          "on": "Interdit maintenant",
+          "off": "Non interdit maintenant",
+          "unknown": "Inconnu"
+        }
+      }
+    }
+  },
   "config": {
     "step": {
       "user": {
