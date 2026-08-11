@@ -1,8 +1,8 @@
 # VigiEau France for Home Assistant
 
-<p align="center">
+<div align="center">
   <img src="https://raw.githubusercontent.com/jptstar/vigieau-france-ha/main/brand/logo%402x.png" width="180" alt="Logo indépendant VigiEau France">
-</p>
+</div>
 
 **Auteur : Jean-Philippe TESTART ([jptstar](https://github.com/jptstar))**
 

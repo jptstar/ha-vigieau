@@ -2,8 +2,8 @@
 
 ## Non publié
 
-- Corrige l’affichage du logo dans le README intégré à HACS avec une adresse
-  d’image absolue.
+- Corrige et centre l’affichage du logo dans les README avec une adresse d’image
+  absolue compatible avec l’affichage intégré à HACS.
 - Met la documentation des entités et du redémarrage Home Assistant à jour.
 
 ## 0.3.1 - 2026-08-11
