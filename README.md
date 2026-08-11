@@ -12,6 +12,22 @@ Son objectif est de restituer dans Home Assistant, pour une même localisation, 
 
 > Ce projet n’est ni affilié ni approuvé par l’État français. L’arrêté préfectoral ou municipal applicable reste le texte juridiquement opposable.
 
+## Support et maintenance
+
+VigiEau France est une intégration Home Assistant que j’ai initialement
+développée par plaisir et pour mon usage personnel.
+
+Les retours précis et les diagnostics Home Assistant peuvent m’aider à améliorer
+la compatibilité avec certaines configurations et à corriger les bugs. Je suis
+disposé à consacrer du temps à ces améliorations lorsque cela m’est possible.
+Toutefois, VigiEau France reste un projet personnel réalisé sur mon temps libre
+et non mon activité principale. Les réponses, analyses et correctifs peuvent
+donc parfois prendre du temps.
+
+L’intégration masque l’adresse et les coordonnées précises dans ses diagnostics.
+Par précaution, vérifiez néanmoins leur contenu avant de les publier dans une
+issue GitHub.
+
 ## Principes
 
 - recherche d’adresse via le service public français d’adresses ;

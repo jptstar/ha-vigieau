@@ -7,6 +7,8 @@
 - Met la documentation des entités et du redémarrage Home Assistant à jour.
 - Utilise une icône maison pour les façades et toitures, et une icône représentant
   un plan d’eau pour les lacs, étangs et mares.
+- Ajoute au README une section française sur le support, la maintenance bénévole
+  et le partage prudent des diagnostics.
 
 ## 0.3.1 - 2026-08-11
 
