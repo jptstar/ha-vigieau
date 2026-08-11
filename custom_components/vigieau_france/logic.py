@@ -26,11 +26,14 @@ _USAGE_ICON_RULES = (
     (("terrain de sport", "terrains de sport", "stade"), "mdi:soccer-field"),
     (("vehicule", "voiture"), "mdi:car-wash"),
     (("piscine", "baignade"), "mdi:pool"),
-    (("plan d'eau", "plans d'eau", "etang", "mare"), "mdi:waves"),
-    (("facade", "toiture", "trottoir", "surface impermeabilisee"), "mdi:spray-bottle"),
+    (("plan d'eau", "plans d'eau", "etang", "mare"), "mdi:island"),
+    (("facade", "toiture"), "mdi:home-outline"),
+    (("trottoir", "surface impermeabilisee", "nettoyage"), "mdi:spray-bottle"),
     (("douche",), "mdi:shower"),
     (("jardin", "culture", "irrigation"), "mdi:sprout"),
 )
+
+_MAX_USAGE_STATE_LENGTH = 255
 
 
 def restriction_rank(severity: str | None) -> int:
@@ -72,8 +75,13 @@ def usage_icon(usage_name: str) -> str:
 
 
 def usage_message_state(description: str) -> str:
-    """Return a short state while the full official message stays an attribute."""
-    return "Disponible" if description.strip() else "Non disponible"
+    """Expose the official text as state, shortened only when HA requires it."""
+    message = description.strip()
+    if not message:
+        return "Aucun message"
+    if len(message) <= _MAX_USAGE_STATE_LENGTH:
+        return message
+    return f"{message[: _MAX_USAGE_STATE_LENGTH - 1].rstrip()}…"
 
 
 def format_zones(zones: list[Zone] | tuple[Zone, ...]) -> tuple[Zone, ...]:

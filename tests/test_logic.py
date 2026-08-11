@@ -78,8 +78,9 @@ def test_usage_icons_match_the_official_usage_name():
         "Arrosage des pelouses, espaces verts et massifs fleuris": "mdi:grass",
         "Arrosage des terrains de sport": "mdi:soccer-field",
         "Lavage des véhicules": "mdi:car-wash",
-        "Nettoyage des façades, toitures et trottoirs": "mdi:spray-bottle",
-        "Remplissage / vidange des plans d'eau": "mdi:waves",
+        "Nettoyage des façades, toitures et trottoirs": "mdi:home-outline",
+        "Nettoyage des trottoirs et surfaces imperméabilisées": "mdi:spray-bottle",
+        "Remplissage / vidange des plans d'eau": "mdi:island",
         "Remplissage et vidange de piscines privées": "mdi:pool",
     }
     for usage_name, expected_icon in expected_icons.items():
@@ -88,9 +89,13 @@ def test_usage_icons_match_the_official_usage_name():
     assert usage_icon("Autre usage de l'eau") == "mdi:water-outline"
 
 
-def test_usage_message_state_is_short_and_preserves_empty_messages():
-    assert usage_message_state("Texte officiel très long") == "Disponible"
-    assert usage_message_state("   ") == "Non disponible"
+def test_usage_message_state_displays_the_official_text_and_limits_long_states():
+    assert usage_message_state("Interdit de 8h à 20h") == "Interdit de 8h à 20h"
+    assert usage_message_state("   ") == "Aucun message"
+    long_message = "Restriction officielle. " * 20
+    shortened = usage_message_state(long_message)
+    assert len(shortened) <= 255
+    assert shortened.endswith("…")
 
 
 def test_zones_are_sorted_by_gravity_and_usages_by_name():

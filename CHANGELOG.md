@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.3.2 - 2026-08-11
+
+- Corrige et centre l’affichage du logo dans les README avec une adresse d’image
+  absolue compatible avec l’affichage intégré à HACS.
+- Met la documentation des entités et du redémarrage Home Assistant à jour.
+- Utilise une icône maison pour les façades et toitures, et une icône représentant
+  un plan d’eau pour les lacs, étangs et mares.
+- Ajoute au README une section française sur le support, la maintenance bénévole
+  et le partage prudent des diagnostics.
+- Rétablit le texte officiel dans l’état des capteurs Message, avec raccourcissement
+  sûr des textes trop longs et conservation intégrale dans `description`.
+- Affiche les états binaires `Restriction` / `Aucune` et `Interdit maintenant` /
+  `Non interdit maintenant`, tout en conservant le texte officiel dans
+  `message_vigieau`.
+
 ## 0.3.1 - 2026-08-11
 
 - Place le nom de l’usage avant le type d’entité pour améliorer la lisibilité :

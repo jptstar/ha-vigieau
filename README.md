@@ -1,8 +1,8 @@
 # VigiEau France for Home Assistant
 
-<p align="center">
-  <img src="brand/logo@2x.png" width="180" alt="Logo indépendant VigiEau France">
-</p>
+<div align="center">
+  <img src="https://raw.githubusercontent.com/jptstar/vigieau-france-ha/main/brand/logo%402x.png" width="180" alt="Logo indépendant VigiEau France">
+</div>
 
 **Auteur : Jean-Philippe TESTART ([jptstar](https://github.com/jptstar))**
 
@@ -11,6 +11,22 @@ VigiEau France est une intégration Home Assistant **non officielle et indépend
 Son objectif est de restituer dans Home Assistant, pour une même localisation, une même provenance d’eau et un même profil, les mêmes informations réglementaires et la même logique de sélection que le site **vigieau.gouv.fr**. Le texte officiel des restrictions reste toujours la donnée de référence.
 
 > Ce projet n’est ni affilié ni approuvé par l’État français. L’arrêté préfectoral ou municipal applicable reste le texte juridiquement opposable.
+
+## Support et maintenance
+
+VigiEau France est une intégration Home Assistant que j’ai initialement
+développée par plaisir et pour mon usage personnel.
+
+Les retours précis et les diagnostics Home Assistant peuvent m’aider à améliorer
+la compatibilité avec certaines configurations et à corriger les bugs. Je suis
+disposé à consacrer du temps à ces améliorations lorsque cela m’est possible.
+Toutefois, VigiEau France reste un projet personnel réalisé sur mon temps libre
+et non mon activité principale. Les réponses, analyses et correctifs peuvent
+donc parfois prendre du temps.
+
+L’intégration masque l’adresse et les coordonnées précises dans ses diagnostics.
+Par précaution, vérifiez néanmoins leur contenu avant de les publier dans une
+issue GitHub.
 
 ## Principes
 
@@ -40,16 +56,20 @@ Chaque localisation crée notamment des capteurs :
 - Dernière actualisation
 - un capteur par usage/restriction affiché par VigiEau
 
-Home Assistant les répartit sur deux appareils liés : l’appareil principal regroupe les capteurs d’information et les messages officiels ; l’appareil enfant **Restrictions VigiEau** regroupe uniquement les capteurs binaires `Restriction` et `Interdit maintenant`. Les deux listes restent ainsi séparées dans l’interface.
+Home Assistant les répartit sur deux appareils liés : l’appareil principal regroupe les capteurs d’information et les messages officiels ; l’appareil enfant **Restrictions VigiEau** regroupe uniquement les capteurs binaires `Restriction` et `Interdit maintenant`. Les deux listes restent ainsi séparées dans l’interface. La situation, la zone, le type d’eau, le profil, l’arrêté en vigueur et la dernière actualisation sont rangés dans la catégorie **Diagnostic**.
 
-Pour conserver une liste lisible, les capteurs de message utilisent un état court (`Disponible` ou `Non disponible`). Le texte officiel intégral reste toujours accessible dans l’attribut `description`, quelle que soit sa longueur. Les noms commencent par leur fonction (`Message`, `Restriction` ou `Interdit maintenant`) afin de rester reconnaissables même lorsqu’ils sont tronqués par Home Assistant. Une icône distincte identifie chaque fonction : texte pour le message, alerte pour la restriction et horloge avec alerte pour l’interdiction à l’instant présent.
+Les capteurs de message affichent directement le texte officiel dans leur état. Si ce texte dépasse la longueur acceptée par Home Assistant, seul l’état est raccourci avec `…` ; le contenu intégral et non modifié reste disponible dans l’attribut `description`. En l’absence de texte, l’état indique `Aucun message`. Le nom de l’usage apparaît en premier : `Nom - Message`, `Nom - Restriction` et `Nom - Interdit maintenant`. Une icône adaptée identifie immédiatement le type d’usage, par exemple potager, pelouse, golf, véhicule, fontaine, piscine ou terrain de sport.
 
 ## Capteurs binaires
 
 Chaque usage reçoit deux capteurs binaires complémentaires :
 
-- **Restriction** : `ON` seulement lorsqu’une restriction est explicitement identifiable ;
-- **Interdit maintenant** : `ON` ou `OFF` seulement lorsque la formulation permet une conclusion déterministe à l’heure locale ; sinon l’état reste `unknown`.
+- **Restriction** : affiche `Restriction` lorsqu’une restriction est explicitement identifiable, `Aucune` lorsque son absence est explicite, sinon `Inconnu` ;
+- **Interdit maintenant** : affiche `Interdit maintenant` ou `Non interdit maintenant` seulement lorsque la formulation permet une conclusion déterministe à l’heure locale ; sinon l’état reste `Inconnu`.
+
+Chaque capteur binaire conserve le texte officiel dans l’attribut `message_vigieau`.
+Home Assistant ne propose pas d’infobulle personnalisable au survol dans la page
+Appareil : ouvrez le capteur pour consulter cet attribut.
 
 Les règles d’un même message ne sont jamais fusionnées entre usages. Par exemple :
 
@@ -77,6 +97,10 @@ Cliquez sur le bouton, ouvrez votre instance Home Assistant, puis confirmez l’
 8. Ouvrez **Paramètres → Appareils et services → Ajouter une intégration**, puis recherchez **VigiEau France**.
 
 Le domaine Home Assistant est `vigieau_france`.
+
+Un redémarrage est nécessaire après l’installation ou la mise à jour du code de
+l’intégration. Une modification du README ou de ses images ne nécessite pas de
+redémarrage de Home Assistant.
 
 ## Audit national
 

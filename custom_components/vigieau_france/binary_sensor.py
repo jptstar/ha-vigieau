@@ -155,6 +155,8 @@ class VigiEauUsageBinarySensor(VigiEauBaseBinarySensor):
 class VigiEauRestrictionBinarySensor(VigiEauUsageBinarySensor):
     """Whether the official message clearly contains a restriction."""
 
+    _attr_translation_key = "usage_restriction"
+
     def __init__(self, coordinator, entry: ConfigEntry, key: str, usage_name: str) -> None:
         super().__init__(
             coordinator,
@@ -179,6 +181,8 @@ class VigiEauRestrictionBinarySensor(VigiEauUsageBinarySensor):
 
 class VigiEauForbiddenNowBinarySensor(VigiEauUsageBinarySensor):
     """Whether a deterministic official rule forbids the use right now."""
+
+    _attr_translation_key = "usage_forbidden_now"
 
     def __init__(self, coordinator, entry: ConfigEntry, key: str, usage_name: str, *, rule_index: int | None = None, rule_subject: str | None = None) -> None:
         self._rule_index = rule_index
