@@ -73,8 +73,8 @@ def usage_icon(usage_name: str) -> str:
 
 
 def usage_message_state(description: str) -> str:
-    """Return a short state while the full official message stays an attribute."""
-    return "Disponible" if description.strip() else "Non disponible"
+    """Tell the user how to access the full official message attribute."""
+    return "Ouvrir pour lire" if description.strip() else "Aucun message"
 
 
 def format_zones(zones: list[Zone] | tuple[Zone, ...]) -> tuple[Zone, ...]:

@@ -9,6 +9,8 @@
   un plan d’eau pour les lacs, étangs et mares.
 - Ajoute au README une section française sur le support, la maintenance bénévole
   et le partage prudent des diagnostics.
+- Remplace l’état ambigu `Disponible` des messages par `Ouvrir pour lire` et
+  indique clairement que le texte officiel complet se trouve dans `description`.
 
 ## 0.3.1 - 2026-08-11
 

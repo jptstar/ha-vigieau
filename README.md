@@ -58,7 +58,7 @@ Chaque localisation crée notamment des capteurs :
 
 Home Assistant les répartit sur deux appareils liés : l’appareil principal regroupe les capteurs d’information et les messages officiels ; l’appareil enfant **Restrictions VigiEau** regroupe uniquement les capteurs binaires `Restriction` et `Interdit maintenant`. Les deux listes restent ainsi séparées dans l’interface. La situation, la zone, le type d’eau, le profil, l’arrêté en vigueur et la dernière actualisation sont rangés dans la catégorie **Diagnostic**.
 
-Pour conserver une liste lisible, les capteurs de message utilisent un état court (`Disponible` ou `Non disponible`). Le texte officiel intégral reste toujours accessible dans l’attribut `description`, quelle que soit sa longueur. Le nom de l’usage apparaît en premier : `Nom - Message`, `Nom - Restriction` et `Nom - Interdit maintenant`. Une icône adaptée identifie immédiatement le type d’usage, par exemple potager, pelouse, golf, véhicule, fontaine, piscine ou terrain de sport.
+Pour conserver une liste lisible, les capteurs de message affichent l’état court `Ouvrir pour lire` lorsqu’un texte officiel existe, ou `Aucun message` dans le cas contraire. Ouvrez l’entité pour consulter le texte officiel intégral dans l’attribut `description`, quelle que soit sa longueur. Le nom de l’usage apparaît en premier : `Nom - Message`, `Nom - Restriction` et `Nom - Interdit maintenant`. Une icône adaptée identifie immédiatement le type d’usage, par exemple potager, pelouse, golf, véhicule, fontaine, piscine ou terrain de sport.
 
 ## Capteurs binaires
 

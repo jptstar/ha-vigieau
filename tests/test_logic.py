@@ -90,8 +90,8 @@ def test_usage_icons_match_the_official_usage_name():
 
 
 def test_usage_message_state_is_short_and_preserves_empty_messages():
-    assert usage_message_state("Texte officiel très long") == "Disponible"
-    assert usage_message_state("   ") == "Non disponible"
+    assert usage_message_state("Texte officiel très long") == "Ouvrir pour lire"
+    assert usage_message_state("   ") == "Aucun message"
 
 
 def test_zones_are_sorted_by_gravity_and_usages_by_name():
