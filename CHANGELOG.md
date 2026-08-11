@@ -7,6 +7,7 @@
   le message intégral reste disponible dans l’attribut `description`.
 - Ajout de préfixes explicites aux noms : `Message`, `Restriction` et
   `Interdit maintenant`.
+- Attribution d’une icône distincte à chacune de ces trois fonctions.
 
 ## 0.2.0 - 2026-08-10
 

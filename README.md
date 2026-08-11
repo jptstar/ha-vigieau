@@ -37,7 +37,7 @@ Chaque localisation crée notamment des capteurs :
 - Dernière actualisation
 - un capteur par usage/restriction affiché par VigiEau
 
-Pour conserver une liste lisible, les capteurs de message utilisent un état court (`Disponible` ou `Non disponible`). Le texte officiel intégral reste toujours accessible dans l’attribut `description`, quelle que soit sa longueur. Les noms commencent par leur fonction (`Message`, `Restriction` ou `Interdit maintenant`) afin de rester reconnaissables même lorsqu’ils sont tronqués par Home Assistant.
+Pour conserver une liste lisible, les capteurs de message utilisent un état court (`Disponible` ou `Non disponible`). Le texte officiel intégral reste toujours accessible dans l’attribut `description`, quelle que soit sa longueur. Les noms commencent par leur fonction (`Message`, `Restriction` ou `Interdit maintenant`) afin de rester reconnaissables même lorsqu’ils sont tronqués par Home Assistant. Une icône distincte identifie chaque fonction : texte pour le message, alerte pour la restriction et horloge avec alerte pour l’interdiction à l’instant présent.
 
 ## Capteurs binaires
 

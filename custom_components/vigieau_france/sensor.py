@@ -209,7 +209,7 @@ class VigiEauUsageSensor(VigiEauBaseSensor):
             f"usage_{key}",
             format_usage_entity_name("Message", initial_name),
         )
-        self._attr_icon = "mdi:water-minus"
+        self._attr_icon = "mdi:text-box-outline"
 
     def _usage(self) -> Usage | None:
         for usage in self.coordinator.data.visible_usages:
