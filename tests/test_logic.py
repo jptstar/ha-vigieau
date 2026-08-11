@@ -78,8 +78,9 @@ def test_usage_icons_match_the_official_usage_name():
         "Arrosage des pelouses, espaces verts et massifs fleuris": "mdi:grass",
         "Arrosage des terrains de sport": "mdi:soccer-field",
         "Lavage des véhicules": "mdi:car-wash",
-        "Nettoyage des façades, toitures et trottoirs": "mdi:spray-bottle",
-        "Remplissage / vidange des plans d'eau": "mdi:waves",
+        "Nettoyage des façades, toitures et trottoirs": "mdi:home-outline",
+        "Nettoyage des trottoirs et surfaces imperméabilisées": "mdi:spray-bottle",
+        "Remplissage / vidange des plans d'eau": "mdi:island",
         "Remplissage et vidange de piscines privées": "mdi:pool",
     }
     for usage_name, expected_icon in expected_icons.items():

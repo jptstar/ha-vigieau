@@ -5,6 +5,8 @@
 - Corrige et centre l’affichage du logo dans les README avec une adresse d’image
   absolue compatible avec l’affichage intégré à HACS.
 - Met la documentation des entités et du redémarrage Home Assistant à jour.
+- Utilise une icône maison pour les façades et toitures, et une icône représentant
+  un plan d’eau pour les lacs, étangs et mares.
 
 ## 0.3.1 - 2026-08-11
 
