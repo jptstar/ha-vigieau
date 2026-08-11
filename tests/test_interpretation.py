@@ -35,6 +35,37 @@ def test_time_ban_crossing_midnight() -> None:
     assert result.forbidden_at(time(12, 0)) is False
 
 
+def test_multiple_time_ban_windows() -> None:
+    result = interpret_usage("Interdiction de 8h à 12h et de 14h à 20h")
+    assert result.kind == InterpretationKind.TIME_BAN
+    assert result.restriction is True
+    assert result.forbidden_at(time(7, 59)) is False
+    assert result.forbidden_at(time(8, 0)) is True
+    assert result.forbidden_at(time(12, 0)) is False
+    assert result.forbidden_at(time(14, 0)) is True
+    assert result.forbidden_at(time(20, 0)) is False
+    assert [window.label for window in result.rules[0].windows] == [
+        "08:00–12:00",
+        "14:00–20:00",
+    ]
+
+
+def test_multiple_time_windows_with_distinct_subjects_stay_unknown() -> None:
+    result = interpret_usage(
+        "Interdit de 8h à 12h pour les pelouses et de 14h à 20h pour les massifs"
+    )
+    assert result.kind == InterpretationKind.CONDITIONAL
+    assert result.restriction is True
+    assert result.forbidden_at(time(10, 0)) is None
+
+
+def test_mixed_prohibition_and_permission_stays_unknown() -> None:
+    result = interpret_usage("Interdit de 8h à 12h et autorisé de 14h à 20h")
+    assert result.kind == InterpretationKind.CONDITIONAL
+    assert result.restriction is True
+    assert result.forbidden_at(time(10, 0)) is None
+
+
 def test_lawn_and_other_uses_are_not_merged() -> None:
     result = interpret_usage(
         "Arrosage des pelouses interdit.\n"

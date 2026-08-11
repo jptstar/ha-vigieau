@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.3 - 2026-08-11
+
+- Reconnaît plusieurs plages horaires explicites rattachées à une même
+  interdiction, tout en laissant les formulations mixtes ou ambiguës à
+  `Inconnu`.
+- Documente clairement l’origine et le rôle des capteurs `Message`,
+  `Restriction` et `Interdit maintenant`, avec des exemples horaires et les
+  limites volontaires de l’interprétation.
+
 ## 0.3.2 - 2026-08-11
 
 - Corrige et centre l’affichage du logo dans les README avec une adresse d’image
