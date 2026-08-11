@@ -11,6 +11,7 @@ from homeassistant.components.sensor import SensorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.device_registry import DeviceInfo
+from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
@@ -19,6 +20,7 @@ from .logic import (
     format_usage_entity_name,
     profile_label,
     severity_label,
+    usage_icon,
     usage_key,
     usage_message_state,
     water_type_label,
@@ -87,7 +89,13 @@ class VigiEauBaseSensor(CoordinatorEntity, SensorEntity):
         )
 
 
-class VigiEauSituationSensor(VigiEauBaseSensor):
+class VigiEauDiagnosticSensor(VigiEauBaseSensor):
+    """Base class for informational entities shown in HA diagnostics."""
+
+    _attr_entity_category = EntityCategory.DIAGNOSTIC
+
+
+class VigiEauSituationSensor(VigiEauDiagnosticSensor):
     def __init__(self, coordinator, entry: ConfigEntry) -> None:
         super().__init__(coordinator, entry, "situation", "Situation")
         self._attr_icon = "mdi:water-alert"
@@ -115,7 +123,7 @@ class VigiEauSituationSensor(VigiEauBaseSensor):
         }
 
 
-class VigiEauZoneSensor(VigiEauBaseSensor):
+class VigiEauZoneSensor(VigiEauDiagnosticSensor):
     def __init__(self, coordinator, entry: ConfigEntry) -> None:
         super().__init__(coordinator, entry, "zone", "Zone")
         self._attr_icon = "mdi:map-marker-radius"
@@ -140,7 +148,7 @@ class VigiEauZoneSensor(VigiEauBaseSensor):
         }
 
 
-class VigiEauWaterTypeSensor(VigiEauBaseSensor):
+class VigiEauWaterTypeSensor(VigiEauDiagnosticSensor):
     def __init__(self, coordinator, entry: ConfigEntry) -> None:
         super().__init__(coordinator, entry, "type_eau", "Type d'eau")
         self._attr_icon = "mdi:water"
@@ -150,7 +158,7 @@ class VigiEauWaterTypeSensor(VigiEauBaseSensor):
         return water_type_label(self.coordinator.data.water_type)
 
 
-class VigiEauProfileSensor(VigiEauBaseSensor):
+class VigiEauProfileSensor(VigiEauDiagnosticSensor):
     def __init__(self, coordinator, entry: ConfigEntry) -> None:
         super().__init__(coordinator, entry, "profil", "Profil")
         self._attr_icon = "mdi:account"
@@ -160,7 +168,7 @@ class VigiEauProfileSensor(VigiEauBaseSensor):
         return profile_label(self.coordinator.data.profile)
 
 
-class VigiEauOrderSensor(VigiEauBaseSensor):
+class VigiEauOrderSensor(VigiEauDiagnosticSensor):
     def __init__(self, coordinator, entry: ConfigEntry) -> None:
         super().__init__(coordinator, entry, "arrete", "Arrêté en vigueur")
         self._attr_icon = "mdi:file-document-outline"
@@ -188,7 +196,7 @@ class VigiEauOrderSensor(VigiEauBaseSensor):
         }
 
 
-class VigiEauLastUpdateSensor(VigiEauBaseSensor):
+class VigiEauLastUpdateSensor(VigiEauDiagnosticSensor):
     def __init__(self, coordinator, entry: ConfigEntry) -> None:
         super().__init__(coordinator, entry, "derniere_actualisation", "Dernière actualisation")
         self._attr_icon = "mdi:clock-outline"
@@ -209,7 +217,7 @@ class VigiEauUsageSensor(VigiEauBaseSensor):
             f"usage_{key}",
             format_usage_entity_name("Message", initial_name),
         )
-        self._attr_icon = "mdi:text-box-outline"
+        self._attr_icon = usage_icon(initial_name)
 
     def _usage(self) -> Usage | None:
         for usage in self.coordinator.data.visible_usages:
