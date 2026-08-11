@@ -5,6 +5,7 @@
 from __future__ import annotations
 
 import hashlib
+import unicodedata
 from dataclasses import replace
 
 from .const import (
@@ -15,6 +16,21 @@ from .const import (
     WATER_TYPES,
 )
 from .models import AddressCandidate, Usage, VigiEauSnapshot, Zone
+
+_USAGE_ICON_RULES = (
+    (("fontaine",), "mdi:fountain"),
+    (("golf",), "mdi:golf"),
+    (("potager", "maraichage"), "mdi:sprout"),
+    (("pelouse",), "mdi:grass"),
+    (("espace vert", "massif fleuri", "fleur"), "mdi:flower"),
+    (("terrain de sport", "terrains de sport", "stade"), "mdi:soccer-field"),
+    (("vehicule", "voiture"), "mdi:car-wash"),
+    (("piscine", "baignade"), "mdi:pool"),
+    (("plan d'eau", "plans d'eau", "etang", "mare"), "mdi:waves"),
+    (("facade", "toiture", "trottoir", "surface impermeabilisee"), "mdi:spray-bottle"),
+    (("douche",), "mdi:shower"),
+    (("jardin", "culture", "irrigation"), "mdi:sprout"),
+)
 
 
 def restriction_rank(severity: str | None) -> int:
@@ -40,6 +56,19 @@ def profile_label(profile: str) -> str:
 def format_usage_entity_name(purpose: str, usage_name: str) -> str:
     """Put the official usage name first, followed by the entity purpose."""
     return f"{usage_name} - {purpose}"
+
+
+def usage_icon(usage_name: str) -> str:
+    """Return an icon matching the official VigiEau usage name."""
+    normalized_name = "".join(
+        character
+        for character in unicodedata.normalize("NFKD", usage_name.casefold())
+        if not unicodedata.combining(character)
+    ).replace("’", "'")
+    for keywords, icon in _USAGE_ICON_RULES:
+        if any(keyword in normalized_name for keyword in keywords):
+            return icon
+    return "mdi:water-outline"
 
 
 def usage_message_state(description: str) -> str:

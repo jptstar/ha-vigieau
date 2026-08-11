@@ -8,6 +8,7 @@ from custom_components.vigieau_france.logic import (
     restriction_rank,
     severity_label,
     show_restrictions,
+    usage_icon,
     usage_message_state,
     usage_matches_profile,
 )
@@ -67,6 +68,24 @@ def test_usage_entity_names_put_the_usage_before_the_purpose():
         format_usage_entity_name("Interdit maintenant", usage_name)
         == f"{usage_name} - Interdit maintenant"
     )
+
+
+def test_usage_icons_match_the_official_usage_name():
+    expected_icons = {
+        "Alimentation des fontaines publiques et privées": "mdi:fountain",
+        "Arrosage des golfs": "mdi:golf",
+        "Arrosage des jardins potagers": "mdi:sprout",
+        "Arrosage des pelouses, espaces verts et massifs fleuris": "mdi:grass",
+        "Arrosage des terrains de sport": "mdi:soccer-field",
+        "Lavage des véhicules": "mdi:car-wash",
+        "Nettoyage des façades, toitures et trottoirs": "mdi:spray-bottle",
+        "Remplissage / vidange des plans d'eau": "mdi:waves",
+        "Remplissage et vidange de piscines privées": "mdi:pool",
+    }
+    for usage_name, expected_icon in expected_icons.items():
+        assert usage_icon(usage_name) == expected_icon
+
+    assert usage_icon("Autre usage de l'eau") == "mdi:water-outline"
 
 
 def test_usage_message_state_is_short_and_preserves_empty_messages():

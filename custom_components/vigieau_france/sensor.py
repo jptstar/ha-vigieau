@@ -19,6 +19,7 @@ from .logic import (
     format_usage_entity_name,
     profile_label,
     severity_label,
+    usage_icon,
     usage_key,
     usage_message_state,
     water_type_label,
@@ -209,7 +210,7 @@ class VigiEauUsageSensor(VigiEauBaseSensor):
             f"usage_{key}",
             format_usage_entity_name("Message", initial_name),
         )
-        self._attr_icon = "mdi:text-box-outline"
+        self._attr_icon = usage_icon(initial_name)
 
     def _usage(self) -> Usage | None:
         for usage in self.coordinator.data.visible_usages:

@@ -18,7 +18,13 @@ from homeassistant.util import dt as dt_util
 
 from .const import ATTRIBUTION, DOMAIN, VIGIEAU_WEBSITE
 from .interpretation import InterpretedRule, UsageInterpretation, interpret_usage
-from .logic import format_usage_entity_name, profile_label, usage_key, water_type_label
+from .logic import (
+    format_usage_entity_name,
+    profile_label,
+    usage_icon,
+    usage_key,
+    water_type_label,
+)
 from .models import Usage, VigiEauSnapshot
 
 PARALLEL_UPDATES = 0
@@ -149,8 +155,6 @@ class VigiEauUsageBinarySensor(VigiEauBaseBinarySensor):
 class VigiEauRestrictionBinarySensor(VigiEauUsageBinarySensor):
     """Whether the official message clearly contains a restriction."""
 
-    _attr_icon = "mdi:alert-circle-outline"
-
     def __init__(self, coordinator, entry: ConfigEntry, key: str, usage_name: str) -> None:
         super().__init__(
             coordinator,
@@ -159,6 +163,7 @@ class VigiEauRestrictionBinarySensor(VigiEauUsageBinarySensor):
             key,
             format_usage_entity_name("Restriction", usage_name),
         )
+        self._attr_icon = usage_icon(usage_name)
 
     @property
     def is_on(self) -> bool | None:
@@ -175,8 +180,6 @@ class VigiEauRestrictionBinarySensor(VigiEauUsageBinarySensor):
 class VigiEauForbiddenNowBinarySensor(VigiEauUsageBinarySensor):
     """Whether a deterministic official rule forbids the use right now."""
 
-    _attr_icon = "mdi:clock-alert-outline"
-
     def __init__(self, coordinator, entry: ConfigEntry, key: str, usage_name: str, *, rule_index: int | None = None, rule_subject: str | None = None) -> None:
         self._rule_index = rule_index
         self._rule_subject = rule_subject
@@ -186,6 +189,7 @@ class VigiEauForbiddenNowBinarySensor(VigiEauUsageBinarySensor):
             suffix += f"_{rule_index}"
             name = format_usage_entity_name("Interdit maintenant", rule_subject or usage_name)
         super().__init__(coordinator, entry, suffix, key, name)
+        self._attr_icon = usage_icon(rule_subject or usage_name)
 
     def _selected_rule(self) -> tuple[UsageInterpretation | None, InterpretedRule | None]:
         interpretation = self._interpretation()

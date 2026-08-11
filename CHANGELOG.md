@@ -4,6 +4,8 @@
 
 - Place le nom de l’usage avant le type d’entité pour améliorer la lisibilité :
   `Nom - Message`, `Nom - Restriction` et `Nom - Interdit maintenant`.
+- Ajoute des icônes adaptées aux usages : potager, pelouse, golf, terrain de sport,
+  véhicule, fontaine, piscine, plan d’eau et nettoyage des surfaces.
 
 ## 0.3.0 - 2026-08-11
 
