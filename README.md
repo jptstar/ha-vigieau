@@ -60,22 +60,87 @@ Home Assistant les répartit sur deux appareils liés : l’appareil principal r
 
 Les capteurs de message affichent directement le texte officiel dans leur état. Si ce texte dépasse la longueur acceptée par Home Assistant, seul l’état est raccourci avec `…` ; le contenu intégral et non modifié reste disponible dans l’attribut `description`. En l’absence de texte, l’état indique `Aucun message`. Le nom de l’usage apparaît en premier : `Nom - Message`, `Nom - Restriction` et `Nom - Interdit maintenant`. Une icône adaptée identifie immédiatement le type d’usage, par exemple potager, pelouse, golf, véhicule, fontaine, piscine ou terrain de sport.
 
-## Capteurs binaires
+## Comprendre les messages et les capteurs binaires
 
-Chaque usage reçoit deux capteurs binaires complémentaires :
+### À retenir
 
-- **Restriction** : affiche `Restriction` lorsqu’une restriction est explicitement identifiable, `Aucune` lorsque son absence est explicite, sinon `Inconnu` ;
-- **Interdit maintenant** : affiche `Interdit maintenant` ou `Non interdit maintenant` seulement lorsque la formulation permet une conclusion déterministe à l’heure locale ; sinon l’état reste `Inconnu`.
+Pour chaque usage, l’intégration présente trois informations complémentaires :
 
-Chaque capteur binaire conserve le texte officiel dans l’attribut `message_vigieau`.
-Home Assistant ne propose pas d’infobulle personnalisable au survol dans la page
-Appareil : ouvrez le capteur pour consulter cet attribut.
+1. **Message** reproduit le texte transmis par l’API VigiEau. C’est
+   l’information à lire en priorité.
+2. **Restriction** indique si ce message contient clairement une règle
+   restrictive, même lorsque l’usage n’est pas interdit à l’heure actuelle.
+3. **Interdit maintenant** applique uniquement les horaires simples et
+   suffisamment explicites à l’heure locale de Home Assistant.
 
-Les règles d’un même message ne sont jamais fusionnées entre usages. Par exemple :
+Les deux états binaires sont donc calculés localement par l’intégration à partir
+du message VigiEau. Ce ne sont pas deux valeurs binaires fournies directement
+par l’API. L’intégration est en lecture seule : elle ne commande aucun appareil
+et ne remplace ni le message officiel ni l’arrêté applicable.
+
+### Pourquoi les deux états peuvent être différents
+
+Avec le message `Arrosage interdit de 8h à 20h`, une restriction existe pendant
+toute la durée de validité de l’arrêté, mais l’usage n’est interdit que pendant
+la plage indiquée :
+
+| Heure locale | Restriction | Interdit maintenant |
+| --- | --- | --- |
+| 10:00 | `Restriction` | `Interdit maintenant` |
+| 22:00 | `Restriction` | `Non interdit maintenant` |
+
+Le capteur **Restriction** répond donc à la question « existe-t-il une règle
+restrictive ? ». Le capteur **Interdit maintenant** répond à la question
+« l’usage est-il interdit à cet instant ? ».
+
+### Plages horaires multiples
+
+Les plages multiples sont reconnues lorsqu’elles sont explicites et concernent
+la même interdiction. Avec `Interdiction de 8h à 12h et de 14h à 20h` :
+
+| Heure locale | Interdit maintenant |
+| --- | --- |
+| 10:00 | `Interdit maintenant` |
+| 13:00 | `Non interdit maintenant` |
+| 15:00 | `Interdit maintenant` |
+
+Les plages reconnues sont également visibles dans l’attribut
+`plages_interdites`. L’état est recalculé au début de chaque minute selon le
+fuseau horaire configuré dans Home Assistant, sans attendre un nouvel appel à
+VigiEau.
+
+### Pourquoi un état peut être « Inconnu »
+
+`Inconnu` ne signifie jamais « autorisé ». Il signifie que le texte ne permet
+pas une réponse binaire suffisamment sûre. C’est notamment le cas lorsque le
+message :
+
+- comporte une exception, une dérogation ou une autorisation particulière ;
+- associe des horaires différents à plusieurs usages ;
+- dépend de jours, de dates ou d’autres conditions ;
+- demande de consulter le détail de l’arrêté.
+
+Quelques exemples :
+
+| Message VigiEau | Restriction | Interdit maintenant |
+| --- | --- | --- |
+| `Interdit` | `Restriction` | `Interdit maintenant` |
+| `Interdit de 8h à 20h`, consulté à 22h | `Restriction` | `Non interdit maintenant` |
+| `Interdit sauf dérogation` | `Restriction` | `Inconnu` |
+| `Voir détails dans l’arrêté préfectoral` | `Inconnu` | `Inconnu` |
+
+Chaque capteur binaire conserve le texte complet dans l’attribut
+`message_vigieau`. Home Assistant ne proposant pas d’infobulle personnalisable
+au survol dans la page Appareil, ouvrez le capteur pour consulter cet attribut.
+
+Les règles concernant plusieurs sous-usages ne sont jamais fusionnées. Par
+exemple :
 
 > Arrosage des pelouses interdit. Interdiction horaire de 8h à 20h pour les autres usages.
 
-est interprété en deux sous-règles distinctes : pelouse interdite en permanence et autres usages interdits de 08:00 à 20:00. Le message officiel reste affiché intégralement quelle que soit l’interprétation binaire.
+est interprété en deux sous-règles distinctes : pelouse interdite en permanence
+et autres usages interdits de 08:00 à 20:00. Le message VigiEau reste affiché
+intégralement quelle que soit l’interprétation binaire.
 
 ## Installation HACS
 

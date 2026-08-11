@@ -111,6 +111,23 @@ _TIME_RANGE_RE = re.compile(
     r"(?:à|a|et|-)\s*(?P<h2>\d{1,2})\s*(?:(?:h|:|heures?)\s*(?P<m2>\d{1,2})?)?",
     re.IGNORECASE,
 )
+_PERMISSION_TOKEN_RE = re.compile(
+    r"\b(?:autoris[ée]e?s?|permis(?:e|es)?|possible)\b",
+    re.IGNORECASE,
+)
+_MULTI_WINDOW_CONNECTORS = {
+    "",
+    "et",
+    "ou",
+    "puis",
+    "ainsi que",
+    "et interdit",
+    "ou interdit",
+    "puis interdit",
+    "et interdiction",
+    "ou interdiction",
+    "puis interdiction",
+}
 _MIXED_LAWN_RE = re.compile(
     r"^arrosage\s+des\s+pelouses\s+interdit\s*[.!]?\s*"
     r"interdiction\s+horaire\s+de\s+(?P<h1>\d{1,2})\s*h\s*(?P<m1>\d{1,2})?\s*"
@@ -153,7 +170,7 @@ def _looks_like_simple_time_ban(text: str) -> tuple[TimeWindow, ...] | None:
     if _contains_conditional_marker(text):
         return None
     matches = list(_TIME_RANGE_RE.finditer(text))
-    if len(matches) != 1 or not _BAN_TOKEN_RE.search(text):
+    if not matches or not _BAN_TOKEN_RE.search(text) or _PERMISSION_TOKEN_RE.search(text):
         return None
     unsafe_terms = (
         "réduction", "reduction", "registre", "volume", "prélèvement hebdomadaire",
@@ -162,8 +179,16 @@ def _looks_like_simple_time_ban(text: str) -> tuple[TimeWindow, ...] | None:
     )
     if any(term in text for term in unsafe_terms):
         return None
-    window = _window(matches[0])
-    return (window,) if window is not None else None
+    if len(matches) > 1:
+        for previous, current in zip(matches, matches[1:]):
+            connector = text[previous.end():current.start()]
+            connector = re.sub(r"[\s,;:/-]+", " ", connector).strip()
+            if connector not in _MULTI_WINDOW_CONNECTORS:
+                return None
+    windows = tuple(_window(match) for match in matches)
+    if any(window is None for window in windows):
+        return None
+    return tuple(window for window in windows if window is not None)
 
 
 def _looks_like_unconditional_total_ban(text: str) -> bool:
